@@ -4589,12 +4589,73 @@
       }
       function closeP() { overlay.classList.remove('open'); input.blur(); }
 
-      input.addEventListener('input', () => buildResults(input.value));
       input.addEventListener('keydown', e => {
         if (e.key === 'ArrowDown') { e.preventDefault(); setActive(activeIdx + 1); }
         else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(activeIdx - 1); }
         else if (e.key === 'Enter') { flat[activeIdx] && exec(flat[activeIdx].item); }
         else if (e.key === 'Escape') { closeP(); }
       });
-            overlay.addEventListener('click', e => { if (e.target === overlay) closeP(); }); }); })();
+      overlay.addEventListener('click', e => { if (e.target === overlay) closeP(); });
+    })();
+
+    // ── MAGNETIC BUTTONS (Unique Feature) ─────────────
+    function initMagnetic() {
+      const btns = document.querySelectorAll('.btn-c, .btn-g, #float-cmd-btn, #float-wa, .nav-hire, .pf-btn');
+      btns.forEach(btn => {
+        btn.addEventListener('mousemove', e => {
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          btn.style.transform = `translate(${x * 0.35}px, ${y * 0.35}px) scale(1.04)`;
+          btn.style.transition = 'transform 0.1s ease-out';
+        });
+        btn.addEventListener('mouseleave', () => {
+          btn.style.transform = '';
+          btn.style.transition = 'transform 0.4s cubic-bezier(0.23, 1, 0.32, 1)';
+        });
+      });
+    }
+
+    // ── LIVE SYSTEM STATUS (Unique Feature) ───────────
+    function initLiveStatus() {
+      const statusText = document.querySelector('.cs-ttl');
+      if (!statusText) return;
+      const update = () => {
+        const now = new Date();
+        const hrs = now.getHours();
+        let msg = "SYSTEM ONLINE";
+        if (hrs >= 22 || hrs <= 5) msg = "NIGHT OPS ACTIVE";
+        else if (hrs >= 9 && hrs <= 18) msg = "PEAK PERFORMANCE";
+        statusText.innerHTML = `${msg} <span style="font-size:0.7rem; opacity:0.6; font-weight:normal;">[${now.toLocaleTimeString()}]</span>`;
+      };
+      update();
+      setInterval(update, 1000);
+    }
+
+    // ── KEYBOARD SHORTCUTS (Unique Feature) ──────────
+    window.addEventListener('keydown', e => {
+      if (((e.metaKey || e.ctrlKey) && e.key === 'k') || e.key === '/') {
+        if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          const cmdBtn = document.getElementById('float-cmd-btn');
+          cmdBtn && cmdBtn.click();
+        }
+      }
+    });
+
+    // ── GREETING (Unique Feature) ──────────
+    (function initGreeting() {
+      const g = document.querySelector('.h-avail');
+      if (!g) return;
+      const hrs = new Date().getHours();
+      let gr = "Good Evening";
+      if (hrs < 12) gr = "Good Morning";
+      else if (hrs < 18) gr = "Good Afternoon";
+      const old = g.innerHTML;
+      g.innerHTML = `<span class="h-avail-dot"></span><strong>${gr}!</strong> ${old.replace(/<div.*div>/, '')}`;
+    })();
+
   </script>
+</body>
+
+</html>
