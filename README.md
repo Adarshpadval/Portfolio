@@ -3,7 +3,7 @@
 Welcome to the source code for my portfolio. This is a single-page application built without heavy front-end frameworks, demonstrating high-performance, modern UI/UX design, and complex interactivity using core web technologies (HTML, CSS, JavaScript).
 
 ## 🚀 Live Demo
-You can view the live portfolio at: [https://adarshpadval.github.io/portfolio/](https://adarshpadval.github.io/portfolio/)
+You can view the live portfolio at: [https://adarshpadval.github.io/Portfolio/](https://adarshpadval.github.io/Portfolio/)
 
 ## ⚡ Core Features
 
