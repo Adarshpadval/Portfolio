@@ -571,12 +571,17 @@
       margin: 0 auto;
       width: 100%;
       display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: 60px;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: clamp(32px, 5vw, 60px);
       align-items: center;
       position: relative;
       z-index: 2;
       padding: 76px 0 56px;
+    }
+
+    .hero-l,
+    .hero-r {
+      min-width: 0;
     }
 
     .h-avail {
@@ -624,6 +629,7 @@
       line-height: 1.05;
       letter-spacing: -2.5px;
       margin-bottom: 18px;
+      text-wrap: balance;
     }
 
     .h1 .block {
@@ -780,12 +786,14 @@
       justify-content: center;
       align-items: center;
       position: relative;
+      width: 100%;
     }
 
     .av-scene {
       position: relative;
-      width: 400px;
-      height: 500px;
+      width: min(100%, 400px);
+      height: auto;
+      aspect-ratio: 4 / 5;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -793,8 +801,9 @@
 
     .av-glow {
       position: absolute;
-      width: 360px;
-      height: 360px;
+      width: min(90%, 360px);
+      height: auto;
+      aspect-ratio: 1;
       border-radius: 50%;
       background: radial-gradient(ellipse, rgba(0, 212, 255, .18) 0%, rgba(124, 58, 237, .08) 45%, transparent 70%);
       animation: gp 4s ease-in-out infinite;
@@ -826,15 +835,17 @@
     }
 
     .av-o1 {
-      width: 400px;
-      height: 400px;
+      width: min(100%, 400px);
+      height: auto;
+      aspect-ratio: 1;
       border: 1px dashed rgba(0, 212, 255, .13);
       animation: sp 26s linear infinite;
     }
 
     .av-o2 {
-      width: 300px;
-      height: 300px;
+      width: min(75%, 300px);
+      height: auto;
+      aspect-ratio: 1;
       border: 1px dashed rgba(124, 58, 237, .1);
       animation: sp 18s linear infinite reverse;
     }
@@ -892,7 +903,8 @@
       border-radius: 10px;
       backdrop-filter: blur(12px);
       font-size: .73rem;
-      white-space: nowrap;
+      max-width: 240px;
+      white-space: normal;
       box-shadow: 0 8px 32px rgba(0, 0, 0, .4);
     }
 
@@ -901,6 +913,10 @@
       height: 7px;
       border-radius: 50%;
       flex-shrink: 0;
+    }
+
+    .av-tag>div {
+      min-width: 0;
     }
 
     .dtg {
@@ -915,17 +931,20 @@
 
     .av-tag-v {
       color: var(--txt);
+      overflow-wrap: anywhere;
     }
 
     .av-tag-s {
       color: var(--txt2);
       font-size: .64rem;
       display: block;
+      overflow-wrap: anywhere;
     }
 
     #av-hero {
-      width: 360px;
-      height: 460px;
+      width: min(90%, 360px);
+      height: auto;
+      max-height: 100%;
       position: relative;
       z-index: 3;
       animation: av-fl 6s ease-in-out infinite;
@@ -1853,7 +1872,12 @@
       }
 
       .hero-r {
-        justify-content: flex-start;
+        justify-content: center;
+      }
+
+      .h-sub,
+      .code-deco {
+        max-width: 100%;
       }
 
       .sk-g {
@@ -1883,36 +1907,154 @@
       }
 
       #hero {
-        padding: 64px 24px 0;
+        min-height: auto;
+        padding: 96px 24px 32px;
+      }
+
+      .hero-in {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        padding: 36px 0 24px;
+      }
+
+      .hero-l {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .h-avail {
+        max-width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        line-height: 1.6;
+        margin-inline: auto;
       }
 
       .h1 {
-        font-size: 2.3rem;
+        font-size: clamp(2.2rem, 11vw, 3rem);
+        letter-spacing: -1.5px;
+        max-width: 11ch;
+        margin-inline: auto;
+      }
+
+      .h-sub {
+        max-width: 34ch;
+        font-size: .95rem;
+        margin-bottom: 28px;
+        margin-inline: auto;
+      }
+
+      .h-btns {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 36px;
+      }
+
+      .btn-c,
+      .btn-g {
+        width: 100%;
+        min-width: 0;
+        flex: 1 1 220px;
+        justify-content: center;
       }
 
       .h-stats {
-        gap: 22px;
-        flex-wrap: wrap;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding-top: 0;
+        border-top: 0;
+      }
+
+      .h-stats>div {
+        min-width: 0;
+        padding: 16px 12px;
+        border: 1px solid rgba(0, 212, 255, .12);
+        border-radius: 16px;
+        background: linear-gradient(180deg, rgba(7, 21, 37, .92), rgba(4, 15, 30, .82));
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, .03);
+        text-align: center;
+      }
+
+      .sn {
+        font-size: 1.8rem;
+      }
+
+      .sl {
+        font-size: .68rem;
+        letter-spacing: .4px;
+      }
+
+      .hero-r {
+        max-width: 340px;
+        margin: 0 auto;
+        padding: 18px 12px 10px;
+        border: 1px solid rgba(0, 212, 255, .12);
+        border-radius: 26px;
+        background:
+          linear-gradient(180deg, rgba(7, 21, 37, .78), rgba(3, 8, 18, .5)),
+          radial-gradient(circle at top, rgba(0, 212, 255, .09), transparent 62%);
+        box-shadow: 0 20px 48px rgba(0, 0, 0, .34);
+      }
+
+      .hbg-grad {
+        opacity: .9;
+      }
+
+      .hbg-hex,
+      #clines,
+      #pts2 {
+        display: none;
       }
 
       .av-scene {
-        width: 300px;
-        height: 380px;
+        width: min(100%, 320px);
+        height: auto;
       }
 
       #av-hero {
-        width: 280px;
-        height: 360px;
+        width: min(84vw, 280px);
+        height: auto;
       }
 
       .av-o1 {
-        width: 300px;
-        height: 300px;
+        width: min(100%, 300px);
+        height: auto;
       }
 
       .av-o2 {
-        width: 230px;
-        height: 230px;
+        width: min(76%, 230px);
+        height: auto;
+      }
+
+      .av-badge {
+        max-width: calc(100% - 8px);
+      }
+
+      .av-b1 {
+        top: 4%;
+        right: 0;
+      }
+
+      .av-b2 {
+        bottom: 8%;
+        left: 0;
+      }
+
+      .av-tag {
+        max-width: min(210px, 60vw);
+        padding: 8px 12px;
+        font-size: .68rem;
+      }
+
+      .av-tag-s {
+        font-size: .6rem;
       }
 
       .sk-g,
@@ -1938,6 +2080,71 @@
 
       .code-deco {
         display: none;
+      }
+
+      .scroll-d {
+        display: none;
+      }
+    }
+
+    @media(max-width:560px) {
+      #hero {
+        padding: 92px 18px 28px;
+      }
+
+      .hero-in {
+        gap: 24px;
+        padding: 24px 0 16px;
+      }
+
+      .h-avail {
+        padding: 6px 12px;
+        font-size: .64rem;
+      }
+
+      .h1 {
+        font-size: clamp(2rem, 13vw, 2.5rem);
+      }
+
+      .h-sub {
+        max-width: 30ch;
+      }
+
+      .h-btns {
+        grid-template-columns: 1fr;
+      }
+
+      .btn-c,
+      .btn-g {
+        width: 100%;
+        flex: 1 1 auto;
+      }
+
+      .h-stats {
+        gap: 10px;
+      }
+
+      .h-stats>div {
+        padding: 14px 10px;
+      }
+
+      .av-scene {
+        width: min(100%, 290px);
+      }
+
+      .hero-r {
+        max-width: 300px;
+        padding: 14px 10px 6px;
+        border-radius: 22px;
+      }
+
+      .av-o2,
+      .av-badge {
+        display: none;
+      }
+
+      .av-tag {
+        max-width: min(180px, 64vw);
       }
     }
 
@@ -3053,7 +3260,8 @@
             SaaS platforms, AI-driven applications, and enterprise systems — from code architecture to cloud
             infrastructure.</p>
           <div class="code-deco rv">
-            <div><span class="cm">// Lead Full Stack Developer @ Z-Aksys (2025–Present)</span></div>
+            <div><span class="cm">// Senior Full Stack Developer - Technology @ Z-Aksys (2025–Present)</span>
+            </div>
             <div><span class="kw">const</span> <span class="fn">profile</span> = {</div>
             <div>&nbsp;&nbsp;stack: [<span class="str">"React"</span>, <span class="str">"Node.js"</span>, <span
                 class="str">"PHP"</span>, <span class="str">"AI/RAG"</span>],</div>
@@ -3097,7 +3305,7 @@
             <div class="av-badge av-b1">
               <div class="av-tag">
                 <div class="av-tag-dot dtg"></div>
-                <div><span class="av-tag-v">Online · Z-Aksys</span><span class="av-tag-s">Lead Dev · 2026</span></div>
+                <div><span class="av-tag-v">Online · Z-Aksys</span><span class="av-tag-s">Sr FS Dev · 2026</span></div>
               </div>
             </div>
             <div class="av-badge av-b2">
@@ -3248,7 +3456,7 @@
               <rect x="190" y="278" width="58" height="26" rx="5" fill="rgba(0,212,255,.1)" stroke="rgba(0,212,255,.5)"
                 stroke-width="1.2" />
               <text x="219" y="295" font-family="'JetBrains Mono',monospace" font-size="8" fill="#00d4ff"
-                text-anchor="middle" font-weight="700" letter-spacing="1">LEAD DEV</text>
+                text-anchor="middle" font-weight="700" letter-spacing="1">Sr. DEV</text>
               <!-- Neon shoulder lines -->
               <path d="M65 296 L58 300" stroke="#00d4ff" stroke-width="2" stroke-linecap="round"
                 filter="url(#neon-blur)" />
@@ -3600,7 +3808,7 @@
                 text-anchor="middle" font-weight="600" letter-spacing="1.5">ADARSH PADVAL</text>
             </svg>
             <div style="font-family:var(--fm);font-size:.68rem;color:var(--txt3);letter-spacing:2px;text-align:center;">
-              GHIBLI × MODERN DEV</div>
+               DEV</div>
           </div>
 
           <div class="about-info">
@@ -3695,67 +3903,80 @@
           <div class="tl-item cur">
             <div class="tl-hd">
               <div>
-                <h3 class="tl-co">Z-Aksys</h3>
-                <div class="tl-rl">Lead Full Stack Developer &amp; Solution Architect</div>
-                <div class="tl-loc">📍 Navi Mumbai · Jan 2025 – Present</div>
+                <h3 class="tl-co">Z-Aksys Solutions Pvt Ltd</h3>
+                <div class="tl-rl">Senior Full Stack Developer - Technology · Full-time</div>
+                <div class="tl-loc">📍 Navi Mumbai, Maharashtra, India · On-site · Jan 2025 – Present</div>
               </div>
-              <div class="tl-per">Current</div>
+              <div class="tl-per">1 yr 3 mo</div>
             </div>
             <div class="tl-stk"><span class="ts">React.js</span><span class="ts">Node.js</span><span
-                class="ts">AI/RAG</span><span class="ts">MySQL</span><span class="ts">MongoDB</span><span
+                class="ts">PHP</span><span class="ts">MySQL</span><span class="ts">MongoDB</span><span
                 class="ts">DigitalOcean</span><span class="ts">CloudWays</span><span class="ts">cPanel</span><span
                 class="ts">GitHub Actions</span><span class="ts">PM2</span></div>
             <ul class="tl-ul">
-              <li>Architect and lead delivery of AI-powered SaaS platforms — RAG-based PDF Q&amp;A, ChatGPT-style
-                real-time chat, and secure admin/customer portals</li>
-              <li>Lead, mentor, and code-review a team of 5–6 developers; ensure architectural consistency and on-time
-                delivery</li>
-              <li>Manage cloud infrastructure on DigitalOcean Droplets, CloudWays managed hosting, and cPanel server
-                environments</li>
-              <li>Coordinate with external vendors and freelance developers — scope, reviews, and delivery oversight
+              <li>Build and maintain SaaS platforms, secure admin/customer portals, and production-ready full-stack
+                features.</li>
+              <li>Develop solutions across React.js, Node.js, PHP, MySQL, and MongoDB for business-critical workflows.
               </li>
-              <li>Led VAPT remediation: SQL injection, IDOR, broken authentication, and API exposure resolved</li>
-              <li>Design and maintain CI/CD pipelines via GitHub Actions; production deployments on VPS + PM2</li>
-              <li>Primary technical decision owner across multiple concurrent products</li>
+              <li>Manage deployments and live environments across DigitalOcean, CloudWays, cPanel, and PM2.</li>
+              <li>Support CI/CD, API hardening, and release reliability using GitHub Actions and structured deployment
+                workflows.</li>
             </ul>
           </div>
           <div class="tl-item">
             <div class="tl-hd">
               <div>
-                <h3 class="tl-co">Uponly Technologies</h3>
-                <div class="tl-rl">Full Stack Developer</div>
-                <div class="tl-loc">📍 Navi Mumbai · Feb 2023 – May 2024</div>
+                <h3 class="tl-co">Freelance (Self employed)</h3>
+                <div class="tl-rl">Freelance Web Developer · Freelance</div>
+                <div class="tl-loc">📍 Maharashtra, India · Remote · Jan 2021 – Jan 2025</div>
               </div>
-              <div class="tl-per">1 yr 4 mo</div>
+              <div class="tl-per">4 yrs 1 mo</div>
             </div>
-            <div class="tl-stk"><span class="ts">React.js</span><span class="ts">PHP</span><span
-                class="ts">Node.js</span><span class="ts">MySQL</span><span class="ts">Express.js</span><span
-                class="ts">cPanel</span><span class="ts">REST APIs</span></div>
+            <div class="tl-stk"><span class="ts">PHP</span><span class="ts">WordPress</span><span
+                class="ts">WooCommerce</span><span class="ts">SEO</span><span class="ts">Performance</span><span
+                class="ts">Maintenance</span></div>
             <ul class="tl-ul">
-              <li>Built React-based SaaS dashboards and backend platforms using PHP &amp; Node.js</li>
-              <li>Developed CRM, lead management, HR, and business admin portals</li>
-              <li>Integrated payment gateways, AI APIs, and third-party services end-to-end</li>
-              <li>Managed cPanel hosting environments for all client project deployments</li>
-              <li>Improved API performance and reduced DB load through schema and query optimization</li>
-              <li>🏆 Recognized for technical excellence and leadership</li>
+              <li>Delivered 15+ custom e-commerce and business websites for clients across various industries.</li>
+              <li>Implemented SEO optimization strategies that increased organic traffic.</li>
+              <li>Provided ongoing maintenance, performance tuning, and feature enhancements for client projects.</li>
             </ul>
           </div>
           <div class="tl-item">
             <div class="tl-hd">
               <div>
-                <h3 class="tl-co">Ediquis Technologies</h3>
-                <div class="tl-rl">Web Developer</div>
-                <div class="tl-loc">📍 Remote · Aug 2021 – Sep 2022</div>
+                <h3 class="tl-co">UPONLY Technologies</h3>
+                <div class="tl-rl">Full-stack Developer · Full-time</div>
+                <div class="tl-loc">📍 Navi Mumbai, Maharashtra, India · On-site · Feb 2023 – Apr 2024</div>
               </div>
-              <div class="tl-per">1 yr 2 mo</div>
+              <div class="tl-per">1 yr 3 mo</div>
+            </div>
+            <div class="tl-stk"><span class="ts">React.js</span><span class="ts">Node.js</span><span
+                class="ts">PHP</span><span class="ts">REST APIs</span><span class="ts">MySQL</span><span
+                class="ts">GitHub Actions</span><span class="ts">CI/CD</span></div>
+            <ul class="tl-ul">
+              <li>Developed and maintained SaaS applications using React.js, Node.js, and PHP.</li>
+              <li>Collaborated with UI/UX and QA teams to deliver business-critical solutions for finance and insurance
+                clients.</li>
+              <li>Optimized REST APIs and databases, resulting in a 30% improvement in application performance.</li>
+              <li>Managed deployment pipelines using GitHub Actions for streamlined CI/CD.</li>
+            </ul>
+          </div>
+          <div class="tl-item">
+            <div class="tl-hd">
+              <div>
+                <h3 class="tl-co">Eduquis Technology LLP</h3>
+                <div class="tl-rl">Web Developer · Internship</div>
+                <div class="tl-loc">📍 Pune, Maharashtra, India · Aug 2021 – Aug 2022</div>
+              </div>
+              <div class="tl-per">1 yr 1 mo</div>
             </div>
             <div class="tl-stk"><span class="ts">WordPress</span><span class="ts">PHP</span><span
-                class="ts">ACF</span><span class="ts">Custom Plugins</span><span class="ts">cPanel</span><span
-                class="ts">MySQL</span></div>
+                class="ts">MySQL</span><span class="ts">Front-End</span><span class="ts">HTML/CSS</span><span
+                class="ts">Web Development</span></div>
             <ul class="tl-ul">
-              <li>Delivered custom WordPress and PHP platforms for international clients</li>
-              <li>Built ACF-driven systems, CPT-based portals, and bespoke WordPress plugins</li>
-              <li>Managed cPanel-based deployments, hosting configuration, and post-launch support</li>
+              <li>Built and maintained websites using WordPress, PHP, and MySQL.</li>
+              <li>Worked on front-end development, content updates, and feature enhancements for client projects.</li>
+              <li>Supported testing, deployment, and post-launch website maintenance during the internship.</li>
             </ul>
           </div>
         </div>
@@ -4182,7 +4403,7 @@
     // ═══════════════════════════════════════════════════
     function initTicker() {
       const items = [
-        { dot: 'green', html: 'Currently @ <strong>Z-Aksys</strong> — Lead Full Stack Developer' },
+        { dot: 'green', html: 'Currently @ <strong>Z-Aksys Solutions Pvt Ltd</strong> — Senior Full Stack Developer - Technology' },
         { dot: 'cyan', html: 'Building <strong>AI-Powered SaaS Platforms</strong> — RAG pipelines · ChatGPT-style real-time chat' },
         { dot: 'gold', html: 'Open to <strong>Remote / WFH</strong> opportunities · Navi Mumbai / Mumbai' },
         { dot: 'purple', html: 'Leading a team of <strong>5–6 engineers</strong> — architecture · code reviews · mentoring' },
@@ -4546,6 +4767,8 @@
       const overlay = document.getElementById('cmd-overlay');
       const input = document.getElementById('cmd-input');
       const results = document.getElementById('cmd-results');
+      const trigger = document.getElementById('float-cmd-btn');
+      if (!overlay || !input || !results || !trigger) return;
       let activeIdx = 0;
       let flat = [];
 
@@ -4585,6 +4808,8 @@
       }
       function closeP() { overlay.classList.remove('open'); input.blur(); }
 
+      trigger.addEventListener('click', openP);
+      input.addEventListener('input', e => buildResults(e.target.value));
       input.addEventListener('keydown', e => {
         if (e.key === 'ArrowDown') { e.preventDefault(); setActive(activeIdx + 1); }
         else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(activeIdx - 1); }
