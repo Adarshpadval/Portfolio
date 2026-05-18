@@ -4326,7 +4326,8 @@
 
     // ── PROJECTS ───────────────────────────────────────
     const PROJS = [
-      { t: 'Gift House Dubai', c: 'biz', hs: ['#c9844a', '#f5e6d3'], d: 'Premium gifting & creative studio — curated product showcase and brand identity for a Dubai-based client.', s: ['WordPress', 'WooCommerce', 'PHP'], u: 'https://ivory-zebra-518399.hostingersite.com/' },
+      { t: 'KHUSSHI SYNDICATE', c: 'biz', hs: ['#f17612', '#f5e8d6'], d: 'KHUSSHI SYNDICATE — Premium Indian Exports, Trusted Worldwide. Established in India | Expanded in Dubai | Serving Worldwide', s: ['WordPress', 'WooCommerce', 'PHP'], u: 'https://khushisyndicate.com/' },
+      { t: 'Gift House Dubai', c: 'biz', hs: ['#c9844a', '#f5e6d3'], d: 'Premium gifting & creative studio — curated product showcase and brand identity for a Dubai-based client.', s: ['JS', 'MySQL', 'PHP'], u: 'https://ivory-zebra-518399.hostingersite.com/' },
       { t: 'HKV Benares', c: 'biz', hs: ['#8b1a1a', '#f5e8c8'], d: 'Heritage brand corporate website with rich storytelling, content management, and cultural aesthetics.', s: ['WordPress', 'ACF', 'PHP'], u: 'https://hkvbenaras.com/' },
       { t: 'Uponly', c: 'biz', hs: ['#1a1a8b', '#e8f0ff'], d: 'Tech-forward corporate platform with service showcases, team management, and lead capture flows.', s: ['React.js', 'Node.js', 'MySQL'], u: 'https://www.uponly.in/' },
       { t: 'Uponly Tech', c: 'biz', hs: ['#0a2a4a', '#e0f0ff'], d: 'Technology agency website with portfolio highlights, services, and CMS-driven team management.', s: ['React.js', 'Next.js', 'Tailwind'], u: 'https://www.uponlytech.com/' },
@@ -4348,8 +4349,7 @@
       { t: 'Birla Learn Leap', c: 'saas', hs: ['#001a2a', '#4ab8e8'], d: 'Education SaaS platform with custom admin panel, student management, and content delivery.', s: ['React.js', 'Node.js', 'MongoDB', 'JWT'], u: 'https://birlalearnleap.com/' },
       { t: 'Aditi Firesafety', c: 'saas', hs: ['#1a0000', '#ff6644'], d: 'Inventory & operations management for fire safety products — stock tracking and reports.', s: ['PHP', 'MySQL', 'Bootstrap', 'jQuery'], u: 'http://aditifiresafety.com/' },
       { t: 'Dream Tale Holidays', c: 'saas', hs: ['#001a2a', '#00c8a0'], d: 'Travel booking SaaS with enquiry pipelines, booking management, and tour package admin.', s: ['React.js', 'Node.js', 'MySQL', 'Express.js'], u: 'https://dreamtaleholidays.com/' },
-    ];
-    function renderProjs(f) {
+    ];    function renderProjs(f) {
       const g = document.getElementById('pg');
       if (!g) { console.error('renderProjs: #pg not found'); return; }
       const list = f === 'all' ? PROJS : PROJS.filter(p => p.c === f);
